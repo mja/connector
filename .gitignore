@@ -1,7 +1,0 @@
-lib/joyent_config.rb
-*.swp
-*.log
-database.yml
-facebook.yml
-*.pyc
-tmp
