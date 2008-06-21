@@ -851,6 +851,7 @@ module ApplicationHelper
     end
   	css << stylesheet_link_tag(current_organization.affiliate.name)
   	css << stylesheet_link_tag(@application_name)
+  	css << stylesheet_link_tag("print/#{@application_name}", :media => 'print')
   	css << stylesheet_link_tag("lang/#{current_user.language}/#{current_user.language}-#{@application_name}")
   	css << stylesheet_link_tag("lang/#{current_user.language}/#{current_user.language}")
   	if ['reports', 'connect'].include?(controller.controller_name)
