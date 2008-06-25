@@ -22,6 +22,7 @@ module ApplicationHelper
     when Folder     then 'Files'
     when Bookmark   then 'Bookmarks'
     when List       then 'Lists'
+    when Note       then 'Notes'
     end
   end
 
@@ -44,6 +45,8 @@ module ApplicationHelper
       bookmarks_show_url(:id => item.id)
     when List
       list_url(item)
+    when Note
+      note_url(item)
     else
       logger.info "What are you linking to #{item}"
     end
@@ -68,6 +71,7 @@ module ApplicationHelper
     when StrongspaceFile  then files_strongspace_show_url(:owner_id => item.owner.id, :path => item.relative_path, :update_id => update_id)
     when ServiceFile      then files_service_show_url(:file_id => item.id, :update_id => update_id)  
     when List             then list_url(:id => item, :update_id => update_id)
+    when Note             then note_url(:id => item, :update_id => update_id)
     else logger.info "What are you linking to #{item}"
     end
   rescue => e
