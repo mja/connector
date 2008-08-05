@@ -84,6 +84,7 @@ class JoyentFileType
     ['js',  :text, 'code', 'JavaScript',  'text/javascript'],
     ['c',   :text, 'code', 'Source Code', 'text/plain'],
     ['py',  :text, 'code', 'Source Code', 'text/plain'],
+    ['php', :text, 'code', 'Source Code', 'text/plain'],
     ['tex', :text, 'code', 'TeX',         'application/x-tex'],
     ['xsl', :text, 'code', 'Source Code', 'text/plain'],
 
