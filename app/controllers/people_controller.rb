@@ -13,6 +13,7 @@ $Id$
 
 class PeopleController < AuthenticatedController
   before_filter :load_sort_order, :only => [:list, :group_list]
+  helper :Mail
 
   def current_group_id
     if    @smart_group  then @smart_group.url_id
@@ -658,6 +659,13 @@ class PeopleController < AuthenticatedController
       @toolbar[:manage] = current_user.owns?(@person)
       
       setup_person_groups_manage if @toolbar[:manage]
+      
+      conditions = @person.email_addresses.map {|email_address| "sender LIKE '%#{email_address.email_address}%' OR recipients LIKE '%#{email_address.email_address}%'"}.join(' OR ')
+      unless conditions.empty?
+        @contacts_messages = Message.find(:all, :conditions => conditions, :scope => :org_read)
+      else
+        @contacts_messages = []
+      end
 
       respond_to do |wants|
         wants.html { render :action => 'show' }
