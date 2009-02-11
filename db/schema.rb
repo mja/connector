@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 177) do
+ActiveRecord::Schema.define(:version => 181) do
 
   create_table "addresses", :force => true do |t|
     t.column "person_id",    :integer
@@ -329,10 +329,42 @@ ActiveRecord::Schema.define(:version => 177) do
     t.column "filename",        :string
   end
 
+  add_index "messages", ["filename"], :name => "index_messages_on_filename"
   add_index "messages", ["mailbox_id"], :name => "messages_mailbox_id_index"
   add_index "messages", ["organization_id"], :name => "messages_organization_id_index"
   add_index "messages", ["user_id"], :name => "messages_user_id_index"
-  add_index "messages", ["filename"], :name => "index_messages_on_filename"
+
+  create_table "note_folders", :force => true do |t|
+    t.column "user_id",         :integer
+    t.column "parent_id",       :integer
+    t.column "name",            :string
+    t.column "created_at",      :datetime
+    t.column "updated_at",      :datetime
+    t.column "organization_id", :integer
+  end
+
+  create_table "note_versions", :force => true do |t|
+    t.column "note_id",         :integer
+    t.column "version",         :integer
+    t.column "organization_id", :integer
+    t.column "user_id",         :integer
+    t.column "name",            :string
+    t.column "body",            :text
+    t.column "created_at",      :datetime
+    t.column "updated_at",      :datetime
+    t.column "note_folder_id",  :integer
+  end
+
+  create_table "notes", :force => true do |t|
+    t.column "organization_id", :integer
+    t.column "user_id",         :integer
+    t.column "name",            :string
+    t.column "body",            :text
+    t.column "created_at",      :datetime
+    t.column "updated_at",      :datetime
+    t.column "note_folder_id",  :integer
+    t.column "version",         :integer
+  end
 
   create_table "notifications", :force => true do |t|
     t.column "organization_id", :integer

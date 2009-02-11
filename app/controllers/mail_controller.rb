@@ -7,7 +7,7 @@ governed by the GPLv2.
 
 Report issues and contribute at http://dev.joyent.com/
 
-$Id$
+$Id: mail_controller.rb 743 2008-05-01 17:36:03Z luke@joyent.com $
 --
 =end #(end)
 
